@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#ffd23f" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="SmashMemo" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="icon.svg" />
+  <title>Smash Matchup Memo Ver.3</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header class="app-header"><h1>Smash Matchup Memo</h1><p>Ver.5 / 大会・スマメイト用</p></header>
+<main>
+<section id="homeScreen" class="screen active">
+<div class="install-hint">Safariで開いて「共有」→「ホーム画面に追加」でアプリっぽく使えます。</div>
+<div class="panel hero-panel"><h2>登録キャラ</h2><p>よく使う自キャラだけ登録して、すぐ対策ページへ。</p><div id="registeredList" class="registered-list"></div><button id="openRegisterBtn" class="primary-btn">＋ 自キャラを登録・編集</button></div>
+<div class="panel"><h2>フリーノート</h2><p class="hint">今日の目標・意識すること・雑メモなど。</p><textarea id="freeNote" placeholder="例：今日は崖展開を大事にする"></textarea><button id="saveFreeNoteBtn" class="primary-btn">フリーノートを保存</button></div>
+</section>
+<section id="registerScreen" class="screen"><button class="back-btn" id="backHomeFromRegister">← ホームへ</button><div class="panel"><h2>自キャラ登録</h2><p class="hint">複数登録できます。登録したキャラだけホームに表示されます。</p><input id="registerSearch" class="search" placeholder="キャラ検索..." /><div id="registerGrid" class="character-grid"></div></div></section>
+<section id="opponentScreen" class="screen"><button class="back-btn" id="backHomeFromOpponent">← ホームへ</button><div class="panel selected-my"><div id="selectedMyIcon" class="char-icon big"></div><div><h2 id="selectedMyName"></h2><p>相手キャラを選択</p></div></div><input id="opponentSearch" class="search" placeholder="相手キャラ検索..." /><div id="opponentGrid" class="character-grid"></div></section>
+<section id="matchupScreen" class="screen"><button class="back-btn" id="backOpponentBtn">← 相手キャラ選択へ</button>
+<div class="matchup-hero"><div class="fighter"><div id="heroMyIcon" class="char-icon hero"></div><div id="heroMyName" class="fighter-name"></div></div><div class="vs">VS</div><div class="fighter"><div id="heroOpponentIcon" class="char-icon hero"></div><div id="heroOpponentName" class="fighter-name"></div></div></div>
+<div class="panel"><label>相性評価</label><select id="ratingSelect"><option value="未設定">未設定</option><option value="🟢 有利">🟢 有利</option><option value="🟩 微有利">🟩 微有利</option><option value="🟡 五分">🟡 五分</option><option value="🟧 微不利">🟧 微不利</option><option value="🔴 不利">🔴 不利</option></select></div>
+<nav class="tabs"><button class="tab active" data-tab="quick">試合前</button><button class="tab" data-tab="detail">詳細</button><button class="tab" data-tab="person">人対</button><button class="tab" data-tab="tournament">大会</button><button class="tab" data-tab="video">動画</button></nav>
+<section id="tabQuick" class="tab-content active"><div class="panel important"><h2>ステージ評価</h2><p class="hint">◎おすすめ / ○あり / □普通 / ❌避けたい</p><div id="stageList" class="stage-list"></div><a class="external-link" href="https://smashstage.com/" target="_blank" rel="noopener noreferrer">迷ったらこれ：smashstage.com を開く</a></div><div class="panel important"><h2>試合前メモ</h2><p class="hint">大会前・スマメイトのマッチング中に見る用。</p><textarea id="quickMemo" placeholder="例：焦って採掘しない"></textarea><button id="saveQuickBtn" class="primary-btn">試合前メモを保存</button></div></section>
+<section id="tabDetail" class="tab-content"><div class="panel"><div class="section-head"><h2>詳細対策</h2><button id="addDetailSectionBtn" class="small-btn">＋項目</button></div><p class="hint">カードをタップすると全画面で編集できます。</p><div id="detailList"></div></div></section>
+<section id="tabPerson" class="tab-content"><div class="panel"><h2>人対メモ</h2><input id="personName" placeholder="プレイヤー名 例：○○さん" /><textarea id="personNote" placeholder="相手の癖・通る行動など"></textarea><button id="addPersonBtn" class="primary-btn">人対メモを追加</button><div id="personList"></div></div></section>
+<section id="tabTournament" class="tab-content"><div class="panel"><h2>大会メモ</h2><input id="eventName" placeholder="大会名" /><input id="roundName" placeholder="ラウンド" /><input id="tournamentOpponent" placeholder="相手名" /><div class="result-row"><select id="winLose"><option value="勝ち">勝ち</option><option value="負け">負け</option></select><div class="score-inputs"><input id="myScore" type="number" min="0" max="3" placeholder="自分" /><span>-</span><input id="opponentScore" type="number" min="0" max="3" placeholder="相手" /></div></div><input id="eventDate" type="date" /><textarea id="eventNote" placeholder="反省・よかった点・次回意識すること"></textarea><button id="addTournamentBtn" class="primary-btn">大会メモを追加</button><div id="tournamentList"></div></div></section>
+<section id="tabVideo" class="tab-content"><div class="panel"><h2>動画メモ</h2><input id="videoTitle" placeholder="タイトル" /><input id="videoUrl" placeholder="URL" /><textarea id="videoNote" placeholder="見るポイント"></textarea><button id="addVideoBtn" class="primary-btn">動画を追加</button><div id="videoList"></div></div></section>
+</section>
+</main>
+<div id="editorModal" class="modal hidden"><div class="modal-card"><div class="modal-head"><h2 id="modalTitle"></h2><button id="closeModalBtn" class="small-btn">閉じる</button></div><textarea id="modalTextarea"></textarea><div class="modal-actions"><button id="deleteSectionBtn" class="danger-btn">項目削除</button><button id="saveSectionBtn" class="primary-btn">保存</button></div></div></div>
+<script src="app.js"></script><script>if("serviceWorker"in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./service-worker.js").catch(()=>{}));}</script>
+</body></html>

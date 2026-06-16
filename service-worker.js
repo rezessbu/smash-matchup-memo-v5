@@ -1,0 +1,1 @@
+const CACHE_NAME="smash-matchup-memo-v5";const ASSETS=["./","./index.html","./style.css","./app.js","./manifest.webmanifest","./icon.svg"];self.addEventListener("install",e=>{e.waitUntil(caches.open(CACHE_NAME).then(c=>c.addAll(ASSETS)))});self.addEventListener("fetch",e=>{e.respondWith(caches.match(e.request).then(c=>c||fetch(e.request)))});
